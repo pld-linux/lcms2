@@ -37,7 +37,7 @@ konwersji miêdzy profilami.
 Summary:	Little CMS - header files and developer's documentation
 Summary(pl):	Little CMS - pliki nag³ówkowe i dokumentacja
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files needed to compile programs with liblcms and some
@@ -51,7 +51,7 @@ dla programistów.
 Summary:	Little CMS - static library
 Summary(pl):	Little CMS - biblioteka statyczna
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of liblcms.
@@ -63,7 +63,7 @@ Statyczna biblioteka liblcms.
 Summary:	Example and demonstration programs for Little CMS
 Summary(pl):	Programy przyk³adowe i demonstracyjne do Little CMS
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description progs
 Example and demonstration programs for Little CMS.
@@ -75,7 +75,7 @@ Programy przyk³adowe i demonstracyjne do Little CMS.
 Summary:	Little CMS module for Python
 Summary(pl):	Modu³ Little CMS dla Pythona
 Group:		Libraries/Python
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq	python
 
 %description -n python-lcms
