@@ -9,7 +9,7 @@ Source0:	http://dl.sourceforge.net/lcms/%{name}-%{version}.tar.gz
 # Source0-md5:	5a803460aeb10e762d97e11a37462a69
 URL:		http://www.littlecms.com/
 BuildRequires:	autoconf >= 2.57
-BuildRequires:	automake >= 1.7.2
+BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
