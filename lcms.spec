@@ -2,7 +2,7 @@ Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
 Version:	1.14
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/lcms/%{name}-%{version}.tar.gz
