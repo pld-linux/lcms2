@@ -1,18 +1,23 @@
+%include	/usr/lib/rpm/macros.python
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
-Version:	1.11
+Version:	1.12
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-# Source0-md5:	b21a563eeb240e08d3371cb1426b2bc6
+Source0:	http://dl.sourceforge.net/lcms/%{name}-%{version}.tar.gz
+# Source0-md5:	ac377fc055cf50aa8a8505aedb13a125
 URL:		http://www.littlecms.com/
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.57
+BuildRequires:	automake >= 1.7.2
 BuildRequires:	libjpeg-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	python-devel >= 1.5
+BuildRequires:	rpm-pythonprov
+BuildRequires:	swig >= 1.3.12
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,6 +71,19 @@ Example and demonstration programs for Little CMS.
 %description progs -l pl
 Programy przyk³adowe i demonstracyjne do Little CMS.
 
+%package -n python-lcms
+Summary:	Little CMS module for Python
+Summary(pl):	Modu³ Little CMS dla Pythona
+Group:		Libraries/Python
+Requires:	%{name} = %{version}
+%pyrequires_eq	python
+
+%description -n python-lcms
+Little CMS module for Python.
+
+%description -n python-lcms -l pl
+Modu³ Little CMS dla Pythona.
+
 %prep
 %setup -q
 
@@ -74,18 +92,20 @@ Programy przyk³adowe i demonstracyjne do Little CMS.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	--with-python
 
-%{__make} all 
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install samples/{icctrans,wtpt} tifficc/tifficc $RPM_BUILD_ROOT%{_bindir}
+
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -101,9 +121,9 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*
-%{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_includedir}/*
+%{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
@@ -112,3 +132,8 @@ rm -rf $RPM_BUILD_ROOT
 %files progs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
+
+%files -n python-lcms
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/_lcms.so
+%{py_sitedir}/lcms.py
