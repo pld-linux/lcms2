@@ -1,8 +1,8 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
-Version:	1.08
-Release:	2
+Version:	1.09
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
@@ -68,10 +68,14 @@ Programy przyk³adowe i demonstracyjne do Little CMS.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 %build
-%{__make} all tifficc \
+%{__make} all \
+	OPTFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}" \
+	CC="%{__cc}"
+%{__make} tifficc \
 	OPTFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}" \
 	CC="%{__cc}"
