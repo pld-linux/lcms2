@@ -1,4 +1,7 @@
-%bcond_without	python	# disable python bindings
+#
+# Conditional build:
+%bcond_without	python	# don't build python bindings
+#
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
