@@ -1,34 +1,132 @@
-diff -Nur lcms-1.07.orig/Makefile lcms-1.07/Makefile
---- lcms-1.07.orig/Makefile	Thu Jan  1 01:00:00 1970
-+++ lcms-1.07/Makefile	Mon Mar 19 00:16:43 2001
-@@ -0,0 +1,5 @@
-+all:
-+	make -C src
-+
-+install:
-+	make -C src install
-diff -Nur lcms-1.07.orig/src/Makefile lcms-1.07/src/Makefile
---- lcms-1.07.orig/src/Makefile	Thu Jan  1 01:00:00 1970
-+++ lcms-1.07/src/Makefile	Mon Mar 19 00:24:36 2001
-@@ -0,0 +1,21 @@
-+all: liblcms.la
-+
-+CC = gcc
-+LIBDIR = /usr/lib
-+INCLUDEDIR = /usr/include
-+
-+LIBOBJS = cmscnvrt.lo cmserr.lo cmsgamma.lo cmsgmt.lo cmsintrp.lo cmsio1.lo \
-+	cmslut.lo cmsmatsh.lo cmsmtrx.lo cmspack.lo cmspcs.lo cmswtpnt.lo \
-+	cmsxform.lo
-+
-+%.lo: %.c
-+	libtool $(CC) $(CFLAGS) -c $*.c
-+
-+liblcms.la: $(LIBOBJS)
-+	libtool $(CC) -o liblcms.la $(LIBOBJS) $(LDFLAGS) -rpath $(LIBDIR)
-+
-+install:
-+	install -d $(DESTDIR)$(LIBDIR)
-+	libtool install liblcms.la $(DESTDIR)$(LIBDIR)
-+	install -d $(DESTDIR)$(INCLUDEDIR)
-+	install lcms.h icc34.h $(DESTDIR)$(INCLUDEDIR)
+diff -Nur lcms-1.08.orig/samples/Makefile lcms-1.08/samples/Makefile
+--- lcms-1.08.orig/samples/Makefile	Fri Nov 16 16:54:28 2001
++++ lcms-1.08/samples/Makefile	Wed Jun 26 21:11:22 2002
+@@ -1,14 +1,14 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS = -g -O4 -Wall
++CFLAGS = $(OPTFLAGS) -Wall
+ 
+ all:	icctrans wtpt
+ 
+ icctrans: icctrans.c xgetopt.c
+-	$(CC) $(CFLAGS) icctrans.c xgetopt.c ../src/liblcms.a -I../include -o icctrans -lm
++	$(CC) $(CFLAGS) icctrans.c xgetopt.c $(LDFLAGS) -L../src -L../src/.libs -llcms -I../include -o icctrans -lm
+ 
+ wtpt: wtpt.c
+-	$(CC) $(CFLAGS) wtpt.c ../src/liblcms.a -I../include -o wtpt -lm
++	$(CC) $(CFLAGS) wtpt.c $(LDFLAGS) -L../src -L../src/.libs -llcms -I../include -o wtpt -lm
+ 
+ install:
+ 	# Nothing to install
+diff -Nur lcms-1.08.orig/src/Makefile lcms-1.08/src/Makefile
+--- lcms-1.08.orig/src/Makefile	Wed Nov 28 19:45:03 2001
++++ lcms-1.08/src/Makefile	Wed Jun 26 21:15:55 2002
+@@ -1,49 +1,42 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS  = -g -O4 -I../include -fomit-frame-pointer -Wall 
++CFLAGS  = $(OPTFLAGS) -I../include -Wall 
+ BASEDIR = $(DESTDIR)/usr
+ BINDIR  = $(BASEDIR)/bin
+ LIBDIR  = $(BASEDIR)/lib
+ INCDIR  = $(BASEDIR)/include
+ VERSION = 1.0.8
+-AR      = ar -cru
+-RANLIB  = ranlib
++VINFO   = 1:8:0
++LIBTOOL = libtool
+ 
+-.c.o:	
+-	$(CC) $(CFLAGS) $(LDFLAGS) -c $<
++%.lo: %.c	
++	$(LIBTOOL) $(CC) $(CFLAGS) -c $<
+ 
+ SRCS = cmscnvrt.c cmserr.c cmsgamma.c cmsgmt.c cmsintrp.c cmsio1.c \
+ 	cmslut.c cmsmatsh.c cmsmtrx.c cmspack.c cmspcs.c cmswtpnt.c \
+ 	cmsxform.c cmssamp.c cmscam97.c 
+ 
+-OBJS = $(SRCS:.c=.o)
++OBJS = $(SRCS:.c=.lo)
+ 
+ 
+ 
+-all:	liblcms.a liblcms.so.${VERSION} 
++all:	liblcms.la
+ 
+ 
+ #
+ # Library
+ #
+ 
+-liblcms.a: $(OBJS)
+-	$(AR) liblcms.a $(OBJS)
+-	$(RANLIB) liblcms.a
+-
+-liblcms.so.${VERSION}: $(OBJS) 
+-	-$(CC) $(CFLAGS) $(LDFLAGS) -shared -o liblcms.so.${VERSION} $(OBJS) 
+-	-ln -s liblcms.so.${VERSION} liblcms.so.1
+-	-ln -s liblcms.so.1 liblcms.so
++liblcms.la: $(OBJS)
++	$(LIBTOOL) $(CC) -o liblcms.la $(OBJS) $(LDFLAGS) -rpath $(LIBDIR) -version-info $(VINFO) -lm
+ 
+ #
+ # Installation
+ #
+ 
+-install: liblcms.a  liblcms.so.${VERSION}
++install: liblcms.la
+ 	mkdir -p $(BINDIR) $(LIBDIR) $(INCDIR)
+-	-cp -a liblcms.so* $(LIBDIR)
+-	cp -a liblcms.a $(LIBDIR)
++	$(LIBTOOL) install liblcms.la $(LIBDIR)
+ 	cp ../include/lcms.h ../include/icc34.h $(INCDIR)
+ 
+ #
+@@ -60,4 +53,4 @@
+ #
+ 
+ clean:
+-	-rm $(OBJS)  liblcms.a liblcms.so.${VERSION} liblcms.so.1 liblcms.so
++	-rm -rf $(OBJS) liblcms* .libs
+diff -Nur lcms-1.08.orig/testbed/Makefile lcms-1.08/testbed/Makefile
+--- lcms-1.08.orig/testbed/Makefile	Tue Nov 13 21:54:50 2001
++++ lcms-1.08/testbed/Makefile	Wed Jun 26 21:16:29 2002
+@@ -1,16 +1,16 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS = -g -O4 -fomit-frame-pointer -Wall -I../include
++CFLAGS = $(OPTFLAGS) -Wall -I../include
+ 
+ testcms.o: testcms.c
+ 
+-testcms: testcms.o ../src/liblcms.a
+-	$(CC) $(CFLAGS) testcms.o ../src/liblcms.a -o $@ -lm
++testcms: testcms.o ../src/liblcms.la
++	$(CC) $(CFLAGS) testcms.o $(LDFLAGS) -L../src -L../src/.libs -llcms -o $@ -lm
+ 
+ all: testcms test
+ 
+ test: testcms
+-	./testcms
++	LD_LIBRARY_PATH=../src/.libs ./testcms
+ 
+ install:
+ 	# Nothing to install
+diff -Nur lcms-1.08.orig/tifficc/Makefile lcms-1.08/tifficc/Makefile
+--- lcms-1.08.orig/tifficc/Makefile	Fri Nov 16 16:54:58 2001
++++ lcms-1.08/tifficc/Makefile	Wed Jun 26 21:17:14 2002
+@@ -1,11 +1,11 @@
+ SHELL = /bin/sh
+ 
+-CFLAGS = -g -O4 -fomit-frame-pointer -Wall -I../include -I/usr/include -I/usr/local/include
++CFLAGS = $(OPTFLAGS) -Wall -I../include
+ 
+ all:	tifficc
+ 
+ tifficc: tifficc.o getopt.o
+-	$(CC) $(CFLAGS) tifficc.o getopt.o ../src/liblcms.a -o $@ -lm -ljpeg -ltiff -lz
++	$(CC) $(CFLAGS) tifficc.o getopt.o $(LDFLAGS) -L../src -L../src/.libs -llcms -o $@ -lm -ljpeg -ltiff -lz
+ 
+ tifficc.o: tifficc.c
+ getopt.o: getopt.c
