@@ -42,7 +42,7 @@
 -.c.o:	
 -	$(CC) $(CFLAGS) -c $<
 +%.lo:	%.c	
-+	$(LIBTOOL) $(CC) $(CFLAGS) -c $<
++	$(LIBTOOL) --tag CXX $(CC) $(CFLAGS) -c $<
  
  SRCS = cmscnvrt.c cmserr.c cmsgamma.c cmsgmt.c cmsintrp.c cmsio1.c \
  	cmslut.c cmsmatsh.c cmsmtrx.c cmspack.c cmspcs.c cmswtpnt.c \
@@ -66,7 +66,7 @@
 -	-ln -s liblcms.so.${VERSION} liblcms.so.1
 -	-ln -s liblcms.so.1 liblcms.so
 +liblcms.la: $(OBJS)
-+	$(LIBTOOL) $(CC) -o liblcms.la $(OBJS) $(LDFLAGS) -rpath $(LIBDIR) -version-info $(VINFO) -lm
++	$(LIBTOOL) --tag CXX $(CC) -o liblcms.la $(OBJS) $(LDFLAGS) -rpath $(LIBDIR) -version-info $(VINFO) -lm
  
  #
  # Installation
