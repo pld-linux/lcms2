@@ -1,14 +1,15 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
-Version:	1.10
+Version:	1.11
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-# Source0-md5:	b47dc6d182fed60820db17c3be4e9f66
-Patch0:		%{name}-makefiles.patch
+# Source0-md5:	b21a563eeb240e08d3371cb1426b2bc6
 URL:		http://www.littlecms.com/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
@@ -38,7 +39,7 @@ Header files needed to compile programs with liblcms and some
 documentation useful for programmers.
 
 %description devel -l pl
-Pliki nag³ówkowe potrzebne do linkowana z liblcms oraz dokumentacja
+Pliki nag³ówkowe potrzebne do linkowania z liblcms oraz dokumentacja
 dla programistów.
 
 %package static
@@ -67,23 +68,22 @@ Programy przyk³adowe i demonstracyjne do Little CMS.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__make} all \
-	OPTFLAGS="%{rpmcflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	CC="%{__cc}"
-%{__make} tifficc \
-	OPTFLAGS="%{rpmcflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	CC="%{__cc}"
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure
+
+%{__make} all 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install samples/{icctrans,wtpt} tifficc/tifficc $RPM_BUILD_ROOT%{_bindir}
 
@@ -95,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README
+%doc AUTHORS NEWS README.1ST
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
