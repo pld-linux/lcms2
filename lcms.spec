@@ -1,12 +1,12 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
-Version:	1.07
-Release:	1
+Version:	1.08
+Release:	0.1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-Patch0:		%{name}-makefiles.patch
+#Patch0:		%{name}-makefiles.patch
 URL:		http://www.littlecms.com/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,7 +50,7 @@ Statyczna biblioteka liblcms.
 
 %prep
 %setup -q
-%patch -p1
+#%patch0 -p1
 
 %build
 %{__make} \
@@ -59,6 +59,7 @@ Statyczna biblioteka liblcms.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -77,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/*
 %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+#%attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
 
 %files static
