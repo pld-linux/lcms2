@@ -5,13 +5,6 @@ Version:	1.07
 Release:	1
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefiles.patch
 URL:		http://www.littlecms.com/
@@ -33,13 +26,6 @@ konwersji miЙdzy profilami.
 Summary:	Little CMS - header files and developer's documentation
 Summary(pl):	Little CMS - pliki nagЁСwkowe i dokumentacja
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -54,13 +40,6 @@ dla programistСw.
 Summary:	Little CMS - static library
 Summary(pl):	Little CMS - biblioteka statyczna
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
