@@ -1,12 +1,14 @@
-diff -Nur lcms-1.08.orig/samples/Makefile lcms-1.08/samples/Makefile
---- lcms-1.08.orig/samples/Makefile	Fri Nov 16 16:54:28 2001
-+++ lcms-1.08/samples/Makefile	Wed Jun 26 21:11:22 2002
-@@ -1,14 +1,14 @@
+--- lcms-1.09/samples/Makefile	Fri Jun 14 15:07:01 2002
++++ lcms-1.09.new/samples/Makefile	Sat Mar  1 13:09:10 2003
+@@ -1,6 +1,6 @@
  SHELL = /bin/sh
  
 -CFLAGS = -g -O4 -Wall
 +CFLAGS = $(OPTFLAGS) -Wall
+ BASEDIR = $(DESTDIR)/usr
+ BINDIR  = $(BASEDIR)/bin
  
+@@ -8,10 +8,10 @@
  all:	icctrans wtpt
  
  icctrans: icctrans.c xgetopt.c
@@ -17,29 +19,29 @@ diff -Nur lcms-1.08.orig/samples/Makefile lcms-1.08/samples/Makefile
 -	$(CC) $(CFLAGS) wtpt.c ../src/liblcms.a -I../include -o wtpt -lm
 +	$(CC) $(CFLAGS) wtpt.c $(LDFLAGS) -L../src -L../src/.libs -llcms -I../include -o wtpt -lm
  
- install:
- 	# Nothing to install
-diff -Nur lcms-1.08.orig/src/Makefile lcms-1.08/src/Makefile
---- lcms-1.08.orig/src/Makefile	Wed Nov 28 19:45:03 2001
-+++ lcms-1.08/src/Makefile	Wed Jun 26 21:15:55 2002
-@@ -1,49 +1,42 @@
+ install: icctrans
+ 	-cp icctrans $(BINDIR)
+--- lcms-1.09/src/makefile	Mon Jun 17 14:29:45 2002
++++ lcms-1.09.new/src/makefile	Sat Mar  1 13:36:14 2003
+@@ -1,23 +1,23 @@
  SHELL = /bin/sh
  
--CFLAGS  = -g -O4 -I../include -fomit-frame-pointer -Wall 
-+CFLAGS  = $(OPTFLAGS) -I../include -Wall 
+-CFLAGS  = -g -O4 -I../include -fomit-frame-pointer -Wall
++CFLAGS  = $(OPTFLAGS) -I../include -Wall
+ LDFLAGS = -lm
  BASEDIR = $(DESTDIR)/usr
  BINDIR  = $(BASEDIR)/bin
  LIBDIR  = $(BASEDIR)/lib
  INCDIR  = $(BASEDIR)/include
- VERSION = 1.0.8
+ VERSION = 1.0.9
 -AR      = ar -cru
 -RANLIB  = ranlib
-+VINFO   = 1:8:0
++VINFO = 1:9:0
 +LIBTOOL = libtool
  
 -.c.o:	
--	$(CC) $(CFLAGS) $(LDFLAGS) -c $<
-+%.lo: %.c	
+-	$(CC) $(CFLAGS) -c $<
++%.lo:	%.c	
 +	$(LIBTOOL) $(CC) $(CFLAGS) -c $<
  
  SRCS = cmscnvrt.c cmserr.c cmsgamma.c cmsgmt.c cmsintrp.c cmsio1.c \
@@ -51,11 +53,7 @@ diff -Nur lcms-1.08.orig/src/Makefile lcms-1.08/src/Makefile
  
  
  
--all:	liblcms.a liblcms.so.${VERSION} 
-+all:	liblcms.la
- 
- 
- #
+@@ -28,23 +28,16 @@
  # Library
  #
  
@@ -83,12 +81,13 @@ diff -Nur lcms-1.08.orig/src/Makefile lcms-1.08/src/Makefile
  	cp ../include/lcms.h ../include/icc34.h $(INCDIR)
  
  #
-@@ -60,4 +53,4 @@
+@@ -61,4 +54,5 @@
  #
  
  clean:
 -	-rm $(OBJS)  liblcms.a liblcms.so.${VERSION} liblcms.so.1 liblcms.so
-+	-rm -rf $(OBJS) liblcms* .libs
++	-rm -rf $(OBJS)  liblcms.* .libs
++
 diff -Nur lcms-1.08.orig/testbed/Makefile lcms-1.08/testbed/Makefile
 --- lcms-1.08.orig/testbed/Makefile	Tue Nov 13 21:54:50 2001
 +++ lcms-1.08/testbed/Makefile	Wed Jun 26 21:16:29 2002
@@ -113,15 +112,17 @@ diff -Nur lcms-1.08.orig/testbed/Makefile lcms-1.08/testbed/Makefile
  
  install:
  	# Nothing to install
-diff -Nur lcms-1.08.orig/tifficc/Makefile lcms-1.08/tifficc/Makefile
---- lcms-1.08.orig/tifficc/Makefile	Fri Nov 16 16:54:58 2001
-+++ lcms-1.08/tifficc/Makefile	Wed Jun 26 21:17:14 2002
-@@ -1,11 +1,11 @@
+--- lcms-1.09/tifficc/Makefile	Fri Jun 14 15:49:53 2002
++++ lcms-1.09.new/tifficc/Makefile	Sat Mar  1 13:40:59 2003
+@@ -1,6 +1,6 @@
  SHELL = /bin/sh
  
 -CFLAGS = -g -O4 -fomit-frame-pointer -Wall -I../include -I/usr/include -I/usr/local/include
 +CFLAGS = $(OPTFLAGS) -Wall -I../include
+ BASEDIR = $(DESTDIR)/usr
+ BINDIR  = $(BASEDIR)/bin
  
+@@ -8,7 +8,7 @@
  all:	tifficc
  
  tifficc: tifficc.o getopt.o
