@@ -6,6 +6,7 @@ Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
+# Source0-md5: 8e8e2303351f3c7de335f02196820a4e
 Patch0:		%{name}-makefiles.patch
 URL:		http://www.littlecms.com/
 BuildRequires:	libjpeg-devel
