@@ -65,7 +65,7 @@ Statyczna biblioteka liblcms.
 %build
 %{__make} \
 	CFLAGS="%{rpmcflags}" \
-	LDFLAGS="%{!?debug:-s}"
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
