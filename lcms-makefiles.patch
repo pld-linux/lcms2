@@ -1,0 +1,34 @@
+diff -Nur lcms-1.07.orig/Makefile lcms-1.07/Makefile
+--- lcms-1.07.orig/Makefile	Thu Jan  1 01:00:00 1970
++++ lcms-1.07/Makefile	Mon Mar 19 00:16:43 2001
+@@ -0,0 +1,5 @@
++all:
++	make -C src
++
++install:
++	make -C src install
+diff -Nur lcms-1.07.orig/src/Makefile lcms-1.07/src/Makefile
+--- lcms-1.07.orig/src/Makefile	Thu Jan  1 01:00:00 1970
++++ lcms-1.07/src/Makefile	Mon Mar 19 00:24:36 2001
+@@ -0,0 +1,21 @@
++all: liblcms.la
++
++CC = gcc
++LIBDIR = /usr/lib
++INCLUDEDIR = /usr/include
++
++LIBOBJS = cmscnvrt.lo cmserr.lo cmsgamma.lo cmsgmt.lo cmsintrp.lo cmsio1.lo \
++	cmslut.lo cmsmatsh.lo cmsmtrx.lo cmspack.lo cmspcs.lo cmswtpnt.lo \
++	cmsxform.lo
++
++%.lo: %.c
++	libtool $(CC) $(CFLAGS) -c $*.c
++
++liblcms.la: $(LIBOBJS)
++	libtool $(CC) -o liblcms.la $(LIBOBJS) $(LDFLAGS) -rpath $(LIBDIR)
++
++install:
++	install -d $(DESTDIR)$(LIBDIR)
++	libtool install liblcms.la $(DESTDIR)$(LIBDIR)
++	install -d $(DESTDIR)$(INCLUDEDIR)
++	install lcms.h icc34.h $(DESTDIR)$(INCLUDEDIR)
