@@ -15,7 +15,6 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	python-devel >= 1.5
-BuildRequires:	rpm-pythonprov
 BuildRequires:	swig >= 1.3.12
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
