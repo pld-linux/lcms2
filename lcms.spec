@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.python
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
