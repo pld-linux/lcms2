@@ -7,7 +7,6 @@ License:	LGPL
 Group:		Libraries
 Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefiles.patch
-Patch1:		%{name}-qt3.patch
 URL:		http://www.littlecms.com/
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
@@ -68,7 +67,6 @@ Programy przyk³adowe i demonstracyjne do Little CMS.
 %prep
 %setup -q
 %patch0 -p1
-#%patch1 -p1
 
 %build
 %{__make} all \
