@@ -5,7 +5,8 @@ Version:	1.08
 Release:	2
 License:	LGPL
 Group:		Libraries
-Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
+# Source0-md5:	a1987f5043bc1a21f94c9dbc4adccbfe
 Patch0:		%{name}-makefiles.patch
 Patch1:		%{name}-qt3.patch
 URL:		http://www.littlecms.com/
