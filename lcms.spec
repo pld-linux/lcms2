@@ -39,7 +39,7 @@ Header files needed to compile programs with liblcms and some
 documentation useful for programmers.
 
 %description devel -l pl
-Pliki nag³ówkowe potrzebne do linkowania z liblcms oraz dokumentacja
+Pliki nag³ówkowe potrzebne do konsolidacji z liblcms oraz dokumentacja
 dla programistów.
 
 %package static
