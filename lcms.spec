@@ -1,3 +1,4 @@
+%bcond_without	python	# disable python bindings
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
@@ -14,8 +15,10 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
+%if %{with python}
 BuildRequires:	python-devel >= 1.5
 BuildRequires:	swig >= 1.3.12
+%endif
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -91,7 +94,7 @@ Modu³ Little CMS dla Pythona.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-python
+	--with%{!?with_python:out}-python
 
 %{__make}
 
@@ -133,7 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*.1*
 
+%if %{with python}
 %files -n python-lcms
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/_lcms.so
 %{py_sitedir}/lcms.py
+%endif
