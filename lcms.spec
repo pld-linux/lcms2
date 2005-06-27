@@ -18,6 +18,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	sed >= 4.0
 %if %{with python}
 BuildRequires:	python-devel >= 1.5
 BuildRequires:	swig-python >= 1.3.25
