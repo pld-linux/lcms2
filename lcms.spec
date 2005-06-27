@@ -20,7 +20,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 %if %{with python}
 BuildRequires:	python-devel >= 1.5
-BuildRequires:	swig >= 1.3.12
+BuildRequires:	swig-python >= 1.3.25
 %endif
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -90,6 +90,8 @@ Modu³ Little CMS dla Pythona.
 
 %prep
 %setup -q
+# http://www.mail-archive.com/lcms-user@lists.sourceforge.net/msg01261.html
+sed -i s/SWIGTYPE_LPGAMMATABLE/SWIGTYPE_p_GAMMATABLE/g python/lcms*
 
 %build
 %{__libtoolize}
