@@ -5,12 +5,13 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
 Name:		lcms
-Version:	1.15
-Release:	2
+Version:	1.16
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/lcms/%{name}-%{version}.tar.gz
-# Source0-md5:	76c921973fdea4f880944a024197f924
+# Source0-md5:	b07b623f3e712373ff713fb32cf23651
+Patch0:		%{name}-python.patch
 URL:		http://www.littlecms.com/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.2
@@ -20,8 +21,8 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	sed >= 4.0
 %if %{with python}
-BuildRequires:	python-devel >= 1.5
-BuildRequires:	swig-python >= 1.3.25
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	swig-python >= 1.3.30
 %endif
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -91,10 +92,14 @@ Modu³ Little CMS dla Pythona.
 
 %prep
 %setup -q
-# http://www.mail-archive.com/lcms-user@lists.sourceforge.net/msg01261.html
-sed -i s/SWIGTYPE_LPGAMMATABLE/SWIGTYPE_p_GAMMATABLE/g python/lcms*
+%patch0 -p1
 
 %build
+# rebuild using newer swig (needed for g++ 4/python 2.5)
+cd python
+rm -f lcms.py lcms_wrap.cxx
+swig -python -c++ -I../include lcms.i
+cd ..
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -123,19 +128,19 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README.1ST
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/liblcms.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/liblcms.so
+%{_libdir}/liblcms.la
 %{_includedir}/*.h
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/lcms.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/liblcms.a
 
 %files progs
 %defattr(644,root,root,755)
