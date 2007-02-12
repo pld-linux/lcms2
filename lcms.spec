@@ -3,7 +3,7 @@
 %bcond_without	python	# don't build python bindings
 #
 Summary:	Little CMS - a library to transform between colour profiles
-Summary(pl):	Little CMS - biblioteka do konwersji miêdzy profilami kolorów
+Summary(pl.UTF-8):   Little CMS - biblioteka do konwersji miÄ™dzy profilami kolorÃ³w
 Name:		lcms
 Version:	1.16
 Release:	1
@@ -34,14 +34,14 @@ lcms does not allow to write profiles, and profile manipulation is not
 its goal. Instead, lcms focus on implement fast transforms between
 profiles.
 
-%description -l pl
-lcms nie pozwala na tworzenie profili i obróbka profili nie jest celem
-tej biblioteki. Natomiast lcms skupia siê na implementacji szybkiej
-konwersji miêdzy profilami.
+%description -l pl.UTF-8
+lcms nie pozwala na tworzenie profili i obrÃ³bka profili nie jest celem
+tej biblioteki. Natomiast lcms skupia siÄ™ na implementacji szybkiej
+konwersji miÄ™dzy profilami.
 
 %package devel
 Summary:	Little CMS - header files and developer's documentation
-Summary(pl):	Little CMS - pliki nag³ówkowe i dokumentacja
+Summary(pl.UTF-8):   Little CMS - pliki nagÅ‚Ã³wkowe i dokumentacja
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -49,37 +49,37 @@ Requires:	%{name} = %{version}-%{release}
 Header files needed to compile programs with liblcms and some
 documentation useful for programmers.
 
-%description devel -l pl
-Pliki nag³ówkowe potrzebne do konsolidacji z liblcms oraz dokumentacja
-dla programistów.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe potrzebne do konsolidacji z liblcms oraz dokumentacja
+dla programistÃ³w.
 
 %package static
 Summary:	Little CMS - static library
-Summary(pl):	Little CMS - biblioteka statyczna
+Summary(pl.UTF-8):   Little CMS - biblioteka statyczna
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of liblcms.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka liblcms.
 
 %package progs
 Summary:	Example and demonstration programs for Little CMS
-Summary(pl):	Programy przyk³adowe i demonstracyjne do Little CMS
+Summary(pl.UTF-8):   Programy przykÅ‚adowe i demonstracyjne do Little CMS
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
 %description progs
 Example and demonstration programs for Little CMS.
 
-%description progs -l pl
-Programy przyk³adowe i demonstracyjne do Little CMS.
+%description progs -l pl.UTF-8
+Programy przykÅ‚adowe i demonstracyjne do Little CMS.
 
 %package -n python-lcms
 Summary:	Little CMS module for Python
-Summary(pl):	Modu³ Little CMS dla Pythona
+Summary(pl.UTF-8):   ModuÅ‚ Little CMS dla Pythona
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq	python
@@ -87,8 +87,8 @@ Requires:	%{name} = %{version}-%{release}
 %description -n python-lcms
 Little CMS module for Python.
 
-%description -n python-lcms -l pl
-Modu³ Little CMS dla Pythona.
+%description -n python-lcms -l pl.UTF-8
+ModuÅ‚ Little CMS dla Pythona.
 
 %prep
 %setup -q
