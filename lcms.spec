@@ -3,7 +3,7 @@
 %bcond_without	python	# don't build python bindings
 #
 Summary:	Little CMS - a library to transform between colour profiles
-Summary(pl.UTF-8):   Little CMS - biblioteka do konwersji między profilami kolorów
+Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms
 Version:	1.16
 Release:	1
@@ -41,7 +41,7 @@ konwersji między profilami.
 
 %package devel
 Summary:	Little CMS - header files and developer's documentation
-Summary(pl.UTF-8):   Little CMS - pliki nagłówkowe i dokumentacja
+Summary(pl.UTF-8):	Little CMS - pliki nagłówkowe i dokumentacja
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -55,7 +55,7 @@ dla programistów.
 
 %package static
 Summary:	Little CMS - static library
-Summary(pl.UTF-8):   Little CMS - biblioteka statyczna
+Summary(pl.UTF-8):	Little CMS - biblioteka statyczna
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -67,7 +67,7 @@ Statyczna biblioteka liblcms.
 
 %package progs
 Summary:	Example and demonstration programs for Little CMS
-Summary(pl.UTF-8):   Programy przykładowe i demonstracyjne do Little CMS
+Summary(pl.UTF-8):	Programy przykładowe i demonstracyjne do Little CMS
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
@@ -79,7 +79,7 @@ Programy przykładowe i demonstracyjne do Little CMS.
 
 %package -n python-lcms
 Summary:	Little CMS module for Python
-Summary(pl.UTF-8):   Moduł Little CMS dla Pythona
+Summary(pl.UTF-8):	Moduł Little CMS dla Pythona
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq	python
