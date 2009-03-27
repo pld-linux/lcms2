@@ -6,7 +6,7 @@ Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms
 Version:	1.18
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 # corrupted
@@ -17,6 +17,7 @@ Patch0:		%{name}-python.patch
 URL:		http://www.littlecms.com/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.2
+BuildRequires:	dos2unix
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
@@ -94,6 +95,7 @@ Moduł Little CMS dla Pythona.
 
 %prep
 %setup -q
+dos2unix configure.ac
 %patch0 -p1
 
 %build
