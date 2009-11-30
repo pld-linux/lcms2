@@ -25,6 +25,8 @@ BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	sed >= 4.0
 %if %{with python}
 BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 BuildRequires:	swig-python >= 1.3.30
 %endif
 BuildRequires:	zlib-devel
