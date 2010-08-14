@@ -1,23 +1,22 @@
 #
+# TODO: create lcms2.spec
+#
 # Conditional build:
 %bcond_without	python	# don't build python bindings
 #
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms
-Version:	1.18
-Release:	5
+Version:	1.19
+Release:	1
 License:	MIT
 Group:		Libraries
-# corrupted
-#Source0:	http://dl.sourceforge.net/lcms/%{name}-%{version}.tar.gz
-Source0:	http://www.littlecms.com/%{name}-%{version}.tar.gz
-# Source0-md5:	9f908e2dc48f76db77ac35a382e394c7
+Source0:	http://downloads.sourceforge.net/lcms/%{name}-%{version}.tar.gz
+# Source0-md5:	8af94611baf20d9646c7c2c285859818
 Patch0:		%{name}-python.patch
 URL:		http://www.littlecms.com/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7.2
-BuildRequires:	dos2unix
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
@@ -97,7 +96,7 @@ Moduł Little CMS dla Pythona.
 
 %prep
 %setup -q
-dos2unix configure.ac
+%undos configure.ac
 %patch0 -p1
 
 %build
