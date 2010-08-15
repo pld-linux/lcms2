@@ -8,27 +8,32 @@ Group:		Libraries
 Source0:	http://downloads.sourceforge.net/lcms/%{name}-%{version}a.tar.gz
 # Source0-md5:	c4f115462a7a5b306c247d018d7a8982
 URL:		http://www.littlecms.com/
-BuildRequires:	autoconf >= 2.57
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.7.2
-BuildRequires:	libjpeg-devel
+BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
-BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# There is no pretty description in source archive... use these.
-
 %description
-lcms does not allow to write profiles, and profile manipulation is not
-its goal. Instead, lcms focus on implement fast transforms between
-profiles.
+Little CMS intends to be a small-footprint color management engine,
+with special focus on accuracy and performance. It uses the
+International Color Consortium standard (ICC), which is the modern
+standard when regarding to color management.
+
+Little CMS 2.x supports ICC profile specification v4.2 plus all
+addendums.
 
 %description -l pl.UTF-8
-lcms nie pozwala na tworzenie profili i obróbka profili nie jest celem
-tej biblioteki. Natomiast lcms skupia się na implementacji szybkiej
-konwersji między profilami.
+Little CMS jest lekkim silnikiem zarządzania kolorami, tworzonym
+przede wszystkim z myślą o dokładności i wydajności. Wykorzystuje
+standard International Color Consortium (ICC), będący współczesnym
+standardem zarządzania kolorami.
+
+Little CMS 2.x obsługuje specyfikację profili ICC w wersji 4.2 ze
+wszystkimi poprawkami.
 
 %package devel
 Summary:	Little CMS - header files and developer's documentation
@@ -86,8 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -102,10 +105,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/*
+%doc doc/*.pdf
 %attr(755,root,root) %{_libdir}/liblcms2.so
 %{_libdir}/liblcms2.la
-%{_includedir}/*.h
+%{_includedir}/lcms2*.h
 %{_pkgconfigdir}/lcms2.pc
 
 %files static
@@ -114,5 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/jpgicc
+%attr(755,root,root) %{_bindir}/linkicc
+%attr(755,root,root) %{_bindir}/psicc
+%attr(755,root,root) %{_bindir}/tificc
+%attr(755,root,root) %{_bindir}/transicc
+%{_mandir}/man1/jpgicc.1*
+%{_mandir}/man1/tificc.1*
