@@ -2,7 +2,7 @@ Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms2
 Version:	2.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/lcms/%{name}-%{version}.tar.gz
@@ -15,8 +15,6 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	zlib-devel
-Provides:	lcms
-Obsoletes:	lcms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,8 +40,6 @@ Summary:	Little CMS - header files and developer's documentation
 Summary(pl.UTF-8):	Little CMS - pliki nagłówkowe i dokumentacja
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Provides:	lcms-devel
-Obsoletes:	lcms-devel
 
 %description devel
 Header files needed to compile programs with liblcms and some
@@ -58,8 +54,6 @@ Summary:	Little CMS - static library
 Summary(pl.UTF-8):	Little CMS - biblioteka statyczna
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Provides:	lcms-static
-Obsoletes:	lcms-static
 
 %description static
 Static version of liblcms.
@@ -72,8 +66,6 @@ Summary:	Example and demonstration programs for Little CMS
 Summary(pl.UTF-8):	Programy przykładowe i demonstracyjne do Little CMS
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
-Provides:	lcms-progs
-Obsoletes:	lcms-progs
 
 %description progs
 Example and demonstration programs for Little CMS.
