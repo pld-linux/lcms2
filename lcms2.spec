@@ -1,13 +1,13 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms2
-Version:	2.9
+Version:	2.11
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/lcms/%{name}-%{version}.tar.gz
-# Source0-md5:	758fd9a381ee1b6f058742f6f33c965b
-URL:		http://www.littlecms.com/
+# Source0-md5:	598dae499e58f877ff6788254320f43e
+URL:		https://www.littlecms.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.7.2
 BuildRequires:	libjpeg-devel >= 6b
@@ -23,8 +23,7 @@ with special focus on accuracy and performance. It uses the
 International Color Consortium standard (ICC), which is the modern
 standard when regarding to color management.
 
-Little CMS 2.x supports ICC profile specification v4.2 plus all
-addendums.
+Little CMS 2.11 supports ICC profile specification v4.3.
 
 %description -l pl.UTF-8
 Little CMS jest lekkim silnikiem zarządzania kolorami, tworzonym
@@ -32,8 +31,7 @@ przede wszystkim z myślą o dokładności i wydajności. Wykorzystuje
 standard International Color Consortium (ICC), będący współczesnym
 standardem zarządzania kolorami.
 
-Little CMS 2.x obsługuje specyfikację profili ICC w wersji 4.2 ze
-wszystkimi poprawkami.
+Little CMS 2.11 obsługuje specyfikację profili ICC w wersji 4.3.
 
 %package devel
 Summary:	Little CMS - header files and developer's documentation
@@ -73,6 +71,17 @@ Example and demonstration programs for Little CMS.
 %description progs -l pl.UTF-8
 Programy przykładowe i demonstracyjne do Little CMS.
 
+%package apidocs
+Summary:	Little CMS 2.x API documentation and tutorial
+Summary(pl.UTF-8):	Dokumentacja API i wprowadzenie do Little CMS 2.x
+Group:		Documentation
+
+%description apidocs
+Little CMS 2.x API documentation and tutorial.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API i wprowadzenie do Little CMS 2.x.
+
 %prep
 %setup -q
 
@@ -91,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/liblcms2.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -105,9 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/*.pdf
 %attr(755,root,root) %{_libdir}/liblcms2.so
-%{_libdir}/liblcms2.la
 %{_includedir}/lcms2*.h
 %{_pkgconfigdir}/lcms2.pc
 
@@ -123,4 +133,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tificc
 %attr(755,root,root) %{_bindir}/transicc
 %{_mandir}/man1/jpgicc.1*
+%{_mandir}/man1/linkicc.1*
+%{_mandir}/man1/psicc.1*
 %{_mandir}/man1/tificc.1*
+%{_mandir}/man1/transicc.1*
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/*.odt
