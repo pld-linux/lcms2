@@ -1,3 +1,6 @@
+# Conditional build:
+%bcond_without	static_libs	# static library
+
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms2
@@ -14,6 +17,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2
+BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -90,7 +94,8 @@ Dokumentacja API i wprowadzenie do Little CMS 2.x.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	%{__enable_disable static_libs static}
 
 %{__make}
 
@@ -121,9 +126,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lcms2*.h
 %{_pkgconfigdir}/lcms2.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/liblcms2.a
+%endif
 
 %files progs
 %defattr(644,root,root,755)
