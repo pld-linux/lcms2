@@ -17,6 +17,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -79,6 +80,7 @@ Programy przykładowe i demonstracyjne do Little CMS.
 Summary:	Little CMS 2.x API documentation and tutorial
 Summary(pl.UTF-8):	Dokumentacja API i wprowadzenie do Little CMS 2.x
 Group:		Documentation
+BuildArch:	noarch
 
 %description apidocs
 Little CMS 2.x API documentation and tutorial.
