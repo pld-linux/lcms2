@@ -1,12 +1,12 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms2
-Version:	2.17
-Release:	3
+Version:	2.18
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/lcms/%{name}-%{version}.tar.gz
-# Source0-md5:	9f44275ee8ac122817e94fdc50ecce13
+# Source0-md5:	bf1dcc205fe3889897ed16e2913b3197
 URL:		https://www.littlecms.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -23,7 +23,7 @@ with special focus on accuracy and performance. It uses the
 International Color Consortium standard (ICC), which is the modern
 standard when regarding to color management.
 
-Little CMS 2.12 supports ICC profile specification v4.3.
+Little CMS 2.14+ supports ICC profile specification v4.4.
 
 %description -l pl.UTF-8
 Little CMS jest lekkim silnikiem zarządzania kolorami, tworzonym
@@ -31,7 +31,7 @@ przede wszystkim z myślą o dokładności i wydajności. Wykorzystuje
 standard International Color Consortium (ICC), będący współczesnym
 standardem zarządzania kolorami.
 
-Little CMS 2.12 obsługuje specyfikację profili ICC w wersji 4.3.
+Little CMS 2.14+ obsługuje specyfikację profili ICC w wersji 4.4.
 
 %package devel
 Summary:	Little CMS - header files and developer's documentation
@@ -112,12 +112,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog AUTHORS LICENSE README.md SECURITY.md
-%attr(755,root,root) %{_libdir}/liblcms2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblcms2.so.2
+%{_libdir}/liblcms2.so.*.*.*
+%ghost %{_libdir}/liblcms2.so.2
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/liblcms2.so
+%{_libdir}/liblcms2.so
 %{_includedir}/lcms2*.h
 %{_pkgconfigdir}/lcms2.pc
 
