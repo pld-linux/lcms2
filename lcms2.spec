@@ -5,12 +5,12 @@
 Summary:	Little CMS - a library to transform between colour profiles
 Summary(pl.UTF-8):	Little CMS - biblioteka do konwersji między profilami kolorów
 Name:		lcms2
-Version:	2.19.1
+Version:	2.20
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/lcms/%{name}-%{version}.tar.gz
-# Source0-md5:	541978f73749499e9e0277bfe5a3c868
+# Source0-md5:	a7030a392d78b860d81f86759d605dad
 URL:		https://www.littlecms.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -43,7 +43,7 @@ Little CMS 2.14+ obsługuje specyfikację profili ICC w wersji 4.4.
 Summary:	Little CMS - header files and developer's documentation
 Summary(pl.UTF-8):	Little CMS - pliki nagłówkowe i dokumentacja
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Header files needed to compile programs with liblcms and some
@@ -57,7 +57,7 @@ dla programistów.
 Summary:	Little CMS - static library
 Summary(pl.UTF-8):	Little CMS - biblioteka statyczna
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Static version of liblcms.
@@ -69,7 +69,7 @@ Statyczna biblioteka liblcms.
 Summary:	Example and demonstration programs for Little CMS
 Summary(pl.UTF-8):	Programy przykładowe i demonstracyjne do Little CMS
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description progs
 Example and demonstration programs for Little CMS.
